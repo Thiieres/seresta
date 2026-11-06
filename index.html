@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- ============================================================
+     EDITE AQUI: título e descrição que aparecem no Google
+     (título até ~60 caracteres, descrição até ~155)
+     ============================================================ -->
+<title>SERESTA – Seleção de Espécies para Restauração da Caatinga</title>
+<meta name="description" content="SERESTA é uma ferramenta gratuita que recomenda espécies vegetais resistentes às mudanças climáticas para projetos de restauração da Caatinga, com base em diversidade funcional e serviços ecossistêmicos.">
+<meta name="keywords" content="restauração ecológica, Caatinga, seleção de espécies, diversidade funcional, serviços ecossistêmicos, mudanças climáticas, plantas nativas">
+<meta name="author" content="Thieres Santos Almeida">
+
+<!-- Pré-visualização ao compartilhar o link (WhatsApp, redes sociais) -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="SERESTA – Seleção de Espécies para Restauração da Caatinga">
+<meta property="og:description" content="Recomendação de espécies vegetais resistentes às mudanças climáticas para restauração na Caatinga.">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:image" content="imagens/logo_seresta.png">
+
+<link rel="icon" href="imagens/logo_seresta.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --verde:        #2E7D32;   /* verde principal do SERESTA */
+    --verde-escuro: #1B5E20;   /* rodapé */
+    --verde-vivo:   #07cc46;   /* cor primária do app */
+    --verde-claro:  #E8F5E9;   /* círculos dos ícones */
+    --fundo-suave:  #EFF6EE;   /* seção "Sobre" */
+    --fundo:        #F9FBF9;   /* fundo da página */
+    --texto:        #444444;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--texto);
+    background: var(--fundo);
+    line-height: 1.6;
+  }
+  h1, h2, h3, h4 { font-family: 'Montserrat', 'Inter', sans-serif; }
+  a { color: var(--verde); }
+
+  /* ---------- Barra superior ---------- */
+  .topo {
+    background: var(--verde);
+    padding: 0.6rem 1.5rem;
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 10;
+  }
+  .topo .marca { display: flex; align-items: center; gap: 0.6rem; color: #fff;
+                 font-family: 'Montserrat', sans-serif; font-weight: 700;
+                 letter-spacing: 1px; text-decoration: none; font-size: 1.25rem; }
+  .topo .marca img { height: 44px; }
+  .topo nav a { color: #fff; text-decoration: none; margin-left: 1.4rem;
+                font-size: 0.95rem; opacity: 0.92; }
+  .topo nav a:hover { opacity: 1; text-decoration: underline; }
+  @media (max-width: 640px) { .topo nav { display: none; } }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    background: #fff;
+    text-align: center;
+    padding: 3.5rem 1.5rem 3.5rem;
+  }
+  .hero img.logo { width: 760px; max-width: 94%; height: auto; }
+  .hero h1 {
+    color: var(--verde);
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin: 1.8rem 0 0.8rem;
+  }
+  .hero p {
+    max-width: 640px; margin: 0 auto 2rem;
+    color: var(--verde); font-size: 1.15rem; line-height: 1.7;
+  }
+  .btn {
+    display: inline-block;
+    background: var(--verde); color: #fff; text-decoration: none;
+    padding: 0.8rem 2.5rem; border-radius: 8px;
+    font-size: 1.1rem; font-weight: 600;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    transition: background .15s, transform .15s;
+  }
+  .btn:hover { background: var(--verde-escuro); transform: translateY(-1px); }
+  .btn-sec {
+    background: transparent; color: var(--verde);
+    border: 2px solid var(--verde); box-shadow: none;
+    padding: 0.55rem 1.6rem; font-size: 0.95rem;
+  }
+  .btn-sec:hover { background: var(--verde); color: #fff; }
+
+  /* ---------- Seções ---------- */
+  section { padding: 3rem 1.5rem; }
+  .conteudo { max-width: 1050px; margin: 0 auto; }
+  h2.titulo {
+    text-align: center; color: #444; text-transform: uppercase;
+    letter-spacing: 2px; font-size: 1.3rem; font-weight: 600;
+    margin: 0 0 2rem;
+  }
+
+  .como { background: var(--fundo); border-top: 4px solid var(--verde); }
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .card { text-align: center; padding: 1.5rem; }
+  .card .icone {
+    width: 60px; height: 60px; border-radius: 50%;
+    background: var(--verde-claro); margin: 0 auto 1rem;
+    display: flex; align-items: center; justify-content: center; font-size: 1.8rem;
+  }
+  .card h3 { color: var(--verde); margin: 0 0 0.5rem; font-size: 1.15rem; }
+  .card p { margin: 0; }
+  @media (max-width: 760px) { .cards { grid-template-columns: 1fr; } }
+
+  /* Passos detalhados */
+  .detalhes { background: #fff; }
+  .detalhes details { max-width: 820px; margin: 0 auto; }
+  .detalhes summary {
+    cursor: pointer; list-style: none; text-align: center;
+    color: var(--verde); font-weight: 600; font-size: 1rem;
+    border: 2px solid var(--verde); border-radius: 8px;
+    padding: 0.6rem 1.4rem; width: fit-content; margin: 0 auto 1.5rem;
+    transition: background .15s, color .15s;
+  }
+  .detalhes summary::-webkit-details-marker { display: none; }
+  .detalhes summary:hover { background: var(--verde); color: #fff; }
+  .detalhes summary::after { content: "  ▾"; }
+  .detalhes details[open] summary::after { content: "  ▴"; }
+  .detalhes details[open] summary .abrir { display: none; }
+  .detalhes details:not([open]) summary .fechar { display: none; }
+  .detalhes ol { margin: 0 auto; padding-left: 1.4rem; line-height: 1.9; }
+  .detalhes li { margin-bottom: 0.9rem; }
+  .detalhes li strong { color: var(--verde); }
+  .chamada { text-align: center; margin-top: 2rem; }
+
+  /* Imagens do app (opcional) */
+  .telas { background: var(--fundo); }
+  .telas .grade { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+  .telas figure { margin: 0; text-align: center; }
+  .telas img { max-width: 100%; border-radius: 10px; border: 1px solid #cfe3cf;
+               box-shadow: 0 3px 12px rgba(0,0,0,0.12); }
+  .telas figcaption { font-size: 0.9rem; color: #666; margin-top: 0.6rem; }
+  @media (max-width: 760px) { .telas .grade { grid-template-columns: 1fr; } }
+
+  /* Sobre */
+  .sobre { background: var(--fundo-suave); border-top: 4px solid var(--verde); }
+  .sobre .colunas { display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; }
+  .sobre h3 { color: var(--verde); margin: 0 0 1rem; font-size: 1.15rem; }
+  .sobre p { font-size: 0.95rem; line-height: 1.7; margin: 0 0 1rem; }
+  .aviso { font-size: 0.85rem; color: #6c757d; border-left: 4px solid #F9A825;
+           background: #FFF8E1; padding: 0.7rem 1rem; border-radius: 4px; }
+  @media (max-width: 760px) { .sobre .colunas { grid-template-columns: 1fr; } }
+
+  /* Rodapé */
+  footer {
+    background: var(--verde-escuro); color: #d7ead8;
+    padding: 1.5rem; text-align: center; font-size: 0.9rem;
+  }
+  footer img { height: 44px; vertical-align: middle; margin-right: 0.8rem; opacity: 0.92; }
+  footer a { color: #fff; }
+</style>
+</head>
+
+<body>
+
+<!-- ======================= BARRA SUPERIOR ======================= -->
+<header class="topo">
+  <a class="marca" href="#">
+    SERESTA
+  </a>
+  <nav>
+    <a href="#como-funciona">Como funciona</a>
+    <a href="#sobre">Sobre</a>
+    <a href="#citar">Como citar</a>
+    <a href="https://thiieres.shinyapps.io/seresta/">Abrir aplicação</a>
+  </nav>
+</header>
+
+<!-- ======================= INÍCIO (HERO) ======================= -->
+<div class="hero">
+  <img class="logo" src="imagens/logo_seresta.png" alt="SERESTA – Seletor de Espécies para Restauração – Caatinga">
+  <!-- EDITE AQUI: subtítulo e frase de apresentação -->
+  <h1>Seleção de Espécies para Restauração da Caatinga</h1>
+  <p>Ferramenta para seleção de espécies vegetais resistentes às mudanças climáticas
+     baseada em diversidade funcional e serviços ecossistêmicos.</p>
+  <!-- EDITE AQUI (se mudar o endereço do app): link do botão -->
+  <a class="btn" href="https://thiieres.shinyapps.io/seresta/">Abrir aplicação</a>
+</div>
+
+<!-- ======================= COMO FUNCIONA (3 PASSOS) ======================= -->
+<section class="como" id="como-funciona">
+  <div class="conteudo">
+    <h2 class="titulo">Como funciona</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="icone">📍</div>
+        <h3>1. Localidade</h3>
+        <p>Selecione no mapa a área onde deseja implementar o projeto de restauração na Caatinga.</p>
+      </div>
+      <div class="card">
+        <div class="icone">🌿</div>
+        <h3>2. Serviços</h3>
+        <p>Defina quais serviços ecossistêmicos são prioritários para o seu objetivo de restauração.</p>
+      </div>
+      <div class="card">
+        <div class="icone">📋</div>
+        <h3>3. Espécies</h3>
+        <p>Receba automaticamente a lista de espécies que maximizam os serviços desejados para a sua localidade.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= PASSO A PASSO DETALHADO ======================= -->
+<section class="detalhes">
+  <div class="conteudo">
+    <h2 class="titulo">Entenda a metodologia</h2>
+    <details>
+    <summary><span class="abrir">Ver a metodologia completa</span><span class="fechar">Recolher a metodologia</span></summary>
+    <ol>
+      <li><strong>Seleção da localidade.</strong> Clique no mapa para definir a sua área de interesse.
+          A aplicação identifica automaticamente as espécies com ocorrência potencial naquela quadrícula.
+          A ocorrência potencial é definida pela estabilidade das espécies na célula, no presente e em
+          climas futuros, segundo Modelos de Nicho Ecológico.</li>
+      <li><strong>Escolha dos serviços.</strong> Selecione o serviço ecossistêmico prioritário e o secundário.
+          Os serviços podem ser métricas funcionais (Diversidade Funcional, Ciclagem de Carbono,
+          Ciclagem de Nitrogênio) ou serviços de uso direto fornecidos pelas espécies
+          (Ornamental, Medicinal, Melífero, Forrageiro, Artesanal e Alimentício).</li>
+      <li><strong>Simulação.</strong> O app gera 500 conjuntos com 10 a 15 espécies sorteadas
+          aleatoriamente das espécies com ocorrência potencial na célula selecionada.</li>
+      <li><strong>Cálculo das métricas.</strong> Para cada comunidade são calculadas as métricas funcionais
+          (Riqueza Funcional – FRic – e Média dos atributos para as espécies do conjunto – CWM) e,
+          para os serviços de uso direto, o número de espécies da comunidade que fornecem cada serviço.</li>
+      <li><strong>Seleção hierárquica.</strong> São mantidos apenas os conjuntos com valores acima do
+          percentil 95 no serviço prioritário. Desses, são filtrados os que estão acima do percentil 95
+          no serviço secundário. Se restar mais de um conjunto, é escolhido o de maior valor no serviço prioritário.</li>
+      <li><strong>Resultado.</strong> O conjunto de espécies mais adequado para o seu objetivo é apresentado
+          com a lista completa de espécies, família e hábito, além de um relatório em PDF.</li>
+    </ol>
+    </details>
+    <div class="chamada">
+      <a class="btn" href="https://thiieres.shinyapps.io/seresta/">Usar o SERESTA agora</a>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= CAPTURAS DE TELA (OPCIONAL) =======================
+     Para usar: coloque as imagens na pasta "imagens" com estes nomes
+     (tela_app.png e exemplo_relatorio.png). Se não existirem, a seção some sozinha. -->
+<section class="telas" id="telas" style="display:none">
+  <div class="conteudo">
+    <h2 class="titulo">Veja como é</h2>
+    <div class="grade">
+      <figure>
+        <img src="imagens/tela_app.png" alt="Tela do aplicativo SERESTA" onload="document.getElementById('telas').style.display='block'">
+        <figcaption>Seleção da localidade e dos serviços</figcaption>
+      </figure>
+      <figure>
+        <img src="imagens/exemplo_relatorio.png" alt="Exemplo de relatório em PDF gerado pelo SERESTA" onload="document.getElementById('telas').style.display='block'">
+        <figcaption>Exemplo de relatório gerado</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= SOBRE / CITAÇÃO / CONTATO ======================= -->
+<section class="sobre" id="sobre">
+  <div class="conteudo colunas">
+    <div>
+      <h3>Sobre o Projeto</h3>
+      <p>Este é um produto da Tese de Doutorado de Thieres Almeida no Programa de Pós-Graduação em
+         Ecologia e Conservação da Universidade Federal de Sergipe. A ferramenta tem o objetivo de
+         auxiliar técnicos, pesquisadores e pessoas interessadas na seleção de espécies vegetais
+         para projetos de restauração ecológica na Caatinga.</p>
+      <p><strong>Autor:</strong> Thieres Santos Almeida<br>
+         <strong>Orientação:</strong> Dr. Sidney Feitosa Gouveia<br>
+         <strong>Instituição:</strong> Universidade Federal de Sergipe</p>
+      <p class="aviso">As recomendações são baseadas em modelos de nicho ecológico e dados funcionais que podem
+         conter lacunas de amostragem e incertezas metodológicas. Os resultados devem ser interpretados como
+         um ponto de partida técnico, não como uma prescrição definitiva, e recomenda-se validação em campo
+         e revisão por especialistas antes da implementação.</p>
+    </div>
+    <div>
+      <h3 id="citar">Como Citar</h3>
+      <!-- EDITE AQUI: coloque a citação quando estiver pronta -->
+      <p style="color:#888; font-style:italic;">Citação em elaboração.</p>
+
+      <h3>Contato</h3>
+      <p>✉️ <a href="mailto:thiieres@outlook.com">thiieres@outlook.com</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= RODAPÉ ======================= -->
+<footer>
+  SERESTA · Universidade Federal de Sergipe ·
+  <a href="https://thiieres.shinyapps.io/seresta/">thiieres.shinyapps.io/seresta</a>
+</footer>
+
+<!-- Dados estruturados: ajudam o Google a entender que é um software -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "SERESTA",
+  "description": "Ferramenta para seleção de espécies vegetais resistentes às mudanças climáticas para restauração da Caatinga, baseada em diversidade funcional e serviços ecossistêmicos.",
+  "url": "https://thiieres.shinyapps.io/seresta/",
+  "applicationCategory": "EducationalApplication",
+  "inLanguage": "pt-BR",
+  "author": { "@type": "Person", "name": "Thieres Santos Almeida" },
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "BRL" }
+}
+</script>
+
+</body>
+</html>
